@@ -17,6 +17,7 @@ class UsersAdapter() : PagingDataAdapter<Users.Data, UsersAdapter.UserViewHolder
 ) {
 
     var userItemOnClick: UserItemOnClick? = null
+
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.onBind()
     }
@@ -28,18 +29,16 @@ class UsersAdapter() : PagingDataAdapter<Users.Data, UsersAdapter.UserViewHolder
     )
 
     inner class UserViewHolder(private val binding: ItemUserBinding) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        RecyclerView.ViewHolder(binding.root) {
         private var user: Users.Data? = null
         fun onBind() {
             this.user = getItem(bindingAdapterPosition)
             binding.profileImage.setImage(user?.avatar)
             binding.tvEmail.text = user?.email
             binding.tvName.text = user?.firstName.plus(" ").plus(user?.lastName)
-            setListeners()
-        }
-
-        private fun setListeners() {
-            binding.root.setOnClickListener(this)
+            binding.root.setOnClickListener {
+                user?.id?.let { it1 -> userItemOnClick?.invoke(it1) }
+            }
         }
     }
 }
@@ -47,7 +46,6 @@ class UsersAdapter() : PagingDataAdapter<Users.Data, UsersAdapter.UserViewHolder
 class DiffCallback : DiffUtil.ItemCallback<Users.Data>() {
     override fun areItemsTheSame(oldItem: Users.Data, newItem: Users.Data) =
         oldItem.firstName == newItem.avatar
-
 
     override fun areContentsTheSame(oldItem: Users.Data, newItem: Users.Data) = oldItem != newItem
 

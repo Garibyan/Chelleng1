@@ -36,7 +36,6 @@
             app:layout_constraintStart_toEndOf="@+id/profileImage"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <TextView
             android:id="@+id/tvEmail"
             android:layout_width="0dp"

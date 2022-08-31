@@ -5,7 +5,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.coremotion.challenge1.common.Resource
 import net.coremotion.challenge1.databinding.FragmentUserDetailBinding
@@ -18,7 +17,6 @@ class UserDetailFragment :
 
     private val viewModel: UserDetailViewModel by viewModels()
     private val args: UserDetailFragmentArgs by navArgs()
-
 
     override fun start() {
         observes()
